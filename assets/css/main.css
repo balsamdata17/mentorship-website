@@ -2302,7 +2302,8 @@ body.balsam-page { font-family: var(--default-font); background: #fff; }
   .header { height: var(--ref-hdr); background: rgba(255,255,255,.97); border-bottom: 0; box-shadow: none; }
   .header.scrolled, .scrolled .header { height: var(--ref-hdr); box-shadow: 0 8px 30px rgba(23,25,29,.06); }
   .header > .container-xl { max-width: none; width: 100%; padding-left: calc(4 * var(--vu)); padding-right: calc(1.6 * var(--vu)); gap: calc(1.5 * var(--vu)); }
-  .header .brand img { width: clamp(180px, calc(17.5 * var(--vu)), 280px); height: auto; mix-blend-mode: normal; }
+  .header .brand img { width: clamp(160px, calc(12 * var(--vu)), 192px); height: auto; mix-blend-mode: normal; }
+  .header .navmenu { justify-content: flex-end; }
   .header .navmenu ul { gap: clamp(18px, calc(2.4 * var(--vu)), 38px); }
   .header .navmenu a { padding: 8px 0; color: #2f3237; font-size: clamp(13.5px, calc(1.17 * var(--vu)), 18.7px); font-weight: 600; letter-spacing: 0; white-space: nowrap; }
   .header .navmenu a.active { color: var(--ref-orange); font-weight: 600; }
@@ -2512,13 +2513,13 @@ body.balsam-page { font-family: var(--default-font); background: #fff; }
   .hero-proof span { font-size: clamp(12px, calc(1.08 * var(--vu)), 17.3px); font-weight: 500; }
   .hero-proof b { font-weight: 500; }
 }
-.challenge-heading h2 { font-size: clamp(24px, 3.1vw, 50px); font-weight: 600; letter-spacing: -.02em; }
+.challenge-heading h2 { font-size: clamp(23px, 2.8vw, 46px); font-weight: 600; letter-spacing: -.02em; }
 .challenge-kicker { font-size: clamp(10.5px, 1.02vw, 16.5px); }
-.challenge-grid h3 { font-size: clamp(14px, 1.27vw, 20.4px); font-weight: 600; letter-spacing: -.01em; }
-.challenge-grid p { font-size: clamp(12.5px, 1vw, 16px); }
-.challenge-note { font-size: clamp(12.5px, 1.08vw, 17.3px); }
-.challenge-note strong { font-size: clamp(13px, 1.25vw, 20px); font-weight: 600; }
-@media (max-width: 1100px) { .challenge-grid h3 { font-size: 16px; } .challenge-grid p { font-size: 13.5px; } }
+.challenge-grid h3 { font-size: clamp(14px, 1.12vw, 18px); font-weight: 600; letter-spacing: -.01em; }
+.challenge-grid p { font-size: clamp(12.5px, .88vw, 14px); }
+.challenge-note { font-size: clamp(12px, .98vw, 16px); }
+.challenge-note strong { font-size: clamp(13px, 1.15vw, 18px); font-weight: 600; }
+@media (max-width: 1100px) { .challenge-grid h3 { font-size: 15px; } .challenge-grid p { font-size: 13px; } }
 @media (max-width: 767px) { .challenge-grid h3 { font-size: 15px; } .challenge-grid p { font-size: 12.5px; } }
 
 /* Crisp solid-white chips (replace the blurry baked-in ones; identical positions to the design) */
