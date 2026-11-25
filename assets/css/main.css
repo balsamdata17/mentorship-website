@@ -2515,12 +2515,30 @@ body.balsam-page { font-family: var(--default-font); background: #fff; }
 }
 .challenge-heading h2 { font-size: clamp(23px, 2.8vw, 46px); font-weight: 600; letter-spacing: -.02em; }
 .challenge-kicker { font-size: clamp(10.5px, 1.02vw, 16.5px); }
-.challenge-grid h3 { font-size: clamp(14px, 1.12vw, 18px); font-weight: 600; letter-spacing: -.01em; }
-.challenge-grid p { font-size: clamp(12.5px, .88vw, 14px); }
+.challenge-grid h3 { font-size: clamp(12px, .9vw, 14px); font-weight: 600; letter-spacing: -.01em; }
+.challenge-grid p { font-size: clamp(11px, .76vw, 12px); }
 .challenge-note { font-size: clamp(12px, .98vw, 16px); }
 .challenge-note strong { font-size: clamp(13px, 1.15vw, 18px); font-weight: 600; }
-@media (max-width: 1100px) { .challenge-grid h3 { font-size: 15px; } .challenge-grid p { font-size: 13px; } }
-@media (max-width: 767px) { .challenge-grid h3 { font-size: 15px; } .challenge-grid p { font-size: 12.5px; } }
+@media (max-width: 1100px) { .challenge-grid h3 { font-size: 13px; } .challenge-grid p { font-size: 11.5px; } }
+@media (max-width: 767px) { .challenge-grid h3 { font-size: 12.5px; } .challenge-grid p { font-size: 11px; } }
+
+.challenge-cards-enter .challenge-grid article { animation: challenge-card-swipe .75s cubic-bezier(.2,.7,.2,1) both; }
+.challenge-cards-enter .challenge-grid article:nth-child(2) { animation-delay: .12s; }
+.challenge-cards-enter .challenge-grid article:nth-child(3) { animation-delay: .24s; }
+.challenge-cards-enter .challenge-grid article:nth-child(4) { animation-delay: .36s; }
+.challenge-cards-enter .challenge-grid article:nth-child(5) { animation-delay: .48s; }
+.challenge-cards-enter .challenge-grid article:nth-child(6) { animation-delay: .6s; }
+@keyframes challenge-card-swipe {
+  from { opacity: .35; translate: -56px 0; }
+  to { opacity: 1; translate: 0 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .challenge-cards-enter .challenge-grid article { animation: challenge-card-swipe-reduced .35s ease-out both; }
+}
+@keyframes challenge-card-swipe-reduced {
+  from { translate: -32px 0; }
+  to { translate: 0 0; }
+}
 
 /* Crisp solid-white chips (replace the blurry baked-in ones; identical positions to the design) */
 .hero-chip { display: none; }

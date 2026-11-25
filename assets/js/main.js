@@ -251,6 +251,20 @@
   /**
    * Animation on scroll function and init
    */
+  const challengeSection = document.querySelector('.challenge-section');
+  if (challengeSection) {
+    if ('IntersectionObserver' in window) {
+      const challengeObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          challengeSection.classList.toggle('challenge-cards-enter', entry.isIntersecting);
+        });
+      }, { threshold: 0.12 });
+      challengeObserver.observe(challengeSection);
+    } else {
+      challengeSection.classList.add('challenge-cards-enter');
+    }
+  }
+
   function aosInit() {
     AOS.init({
       duration: 600,
