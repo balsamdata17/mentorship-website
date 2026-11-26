@@ -3194,3 +3194,17 @@ body.balsam-page { overflow-x: clip; }
     font-size: 30px;
   }
 }
+/* v1.5.1 — corrections */
+
+/* 1) weight 200 isn't loaded; use a weight that is */
+.process-section:not(#method) .section-heading h2 { font-weight: 400; }
+.process-section:not(#method) .process-intro { font-weight: 400; }
+
+/* 2) menu panel starts just below the header on every size */
+@media (max-width: 1199px) {
+  .navmenu ul { top: 66px; }
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+  .navmenu ul { top: calc(var(--ref-hdr) + 8px); }
+  .mobile-nav-active .mobile-nav-toggle { top: calc((var(--ref-hdr) - 44px) / 2); }
+}
