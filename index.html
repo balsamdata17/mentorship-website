@@ -339,5 +339,30 @@
   </dialog>
   <script src="assets/vendor/aos/aos.js"></script>
   <script src="assets/js/main.js"></script>
+<script>
+(function () {
+  var old = document.querySelector('.mobile-nav-toggle');
+  if (!old) return;
+  var btn = old.cloneNode(true);              // removes any broken old handlers
+  old.parentNode.replaceChild(btn, old);
+  var nav = document.getElementById('navmenu');
+
+  function setOpen(open) {
+    document.body.classList.toggle('mobile-nav-active', open);
+    btn.classList.toggle('bi-list', !open);
+    btn.classList.toggle('bi-x', open);
+  }
+  btn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    setOpen(!document.body.classList.contains('mobile-nav-active'));
+  });
+  nav.querySelectorAll('a').forEach(function (a) {          // close after choosing a page
+    a.addEventListener('click', function () { setOpen(false); });
+  });
+  nav.addEventListener('click', function (e) {              // tap outside the panel closes it
+    if (e.target === nav) setOpen(false);
+  });
+})();
+</script>
 </body>
 </html>

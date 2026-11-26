@@ -3129,3 +3129,68 @@ body.balsam-page { overflow-x: clip; }
 @media (max-width: 575px) {
   .method-board i { margin: 14px 0 8px; }
 }
+
+/* ==========================================================================
+   v1.5.0 — MOBILE MENU FIX (banner rules NOT touched)
+   ========================================================================== */
+@media (max-width: 1199px) {
+  /* backdrop-filter was trapping the fixed full-screen menu inside the header */
+  .header {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background: #fff;
+  }
+
+  /* easy-to-tap hamburger */
+  .mobile-nav-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    margin: 0;
+    font-size: 30px;
+    color: var(--balsam-ink);
+    cursor: pointer;
+    position: relative;
+    z-index: 10001;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* menu panel */
+  .navmenu { z-index: 10000; }
+  .navmenu ul {
+    display: none;
+    position: absolute;
+    inset: 66px 16px auto 16px;
+    max-height: calc(100vh - 90px);
+    padding: 8px 0;
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 18px 50px rgba(0,0,0,.25);
+    overflow-y: auto;
+  }
+  .navmenu a, .navmenu a:focus {
+    padding: 14px 22px;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--balsam-ink);
+  }
+  .navmenu a:hover, .navmenu a.active { color: var(--balsam-orange); }
+
+  /* open state */
+  .mobile-nav-active { overflow: hidden; }
+  .mobile-nav-active .navmenu {
+    position: fixed;
+    inset: 0;
+    background: rgba(23,25,29,.78);
+  }
+  .mobile-nav-active .navmenu > ul { display: block; }
+  .mobile-nav-active .mobile-nav-toggle {
+    position: fixed;
+    top: 11px;
+    right: 14px;
+    color: #fff;
+    font-size: 30px;
+  }
+}
