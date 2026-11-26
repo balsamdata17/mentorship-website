@@ -13,7 +13,7 @@
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
   <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="assets/css/main.css" rel="stylesheet">
+  <link href="assets/css/main.css?v=160" rel="stylesheet">
 </head>
 <body class="balsam-page">
   <header id="header" class="header fixed-top">
@@ -343,10 +343,9 @@
 (function () {
   var old = document.querySelector('.mobile-nav-toggle');
   if (!old) return;
-  var btn = old.cloneNode(true);              // removes any broken old handlers
+  var btn = old.cloneNode(true);
   old.parentNode.replaceChild(btn, old);
   var nav = document.getElementById('navmenu');
-
   function setOpen(open) {
     document.body.classList.toggle('mobile-nav-active', open);
     btn.classList.toggle('bi-list', !open);
@@ -356,12 +355,10 @@
     e.stopPropagation();
     setOpen(!document.body.classList.contains('mobile-nav-active'));
   });
-  nav.querySelectorAll('a').forEach(function (a) {          // close after choosing a page
+  nav.querySelectorAll('a').forEach(function (a) {
     a.addEventListener('click', function () { setOpen(false); });
   });
-  nav.addEventListener('click', function (e) {              // tap outside the panel closes it
-    if (e.target === nav) setOpen(false);
-  });
+  nav.addEventListener('click', function (e) { if (e.target === nav) setOpen(false); });
 })();
 </script>
 </body>
