@@ -3290,3 +3290,18 @@ body.balsam-page { overflow-x: clip; }
   .navmenu ul { top: calc(var(--ref-hdr) + 8px); }
   .mobile-nav-active .mobile-nav-toggle { top: calc((var(--ref-hdr) - 44px) / 2); }
 }
+/* v1.7.0 — arrow button above WhatsApp: always visible, flips down/up */
+.scroll-top,
+.scroll-top.active,
+body:not(.scrolled) .scroll-top {
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  right: 27px;
+  bottom: 88px !important;
+  width: 44px;
+  height: 44px;
+  background: var(--balsam-ink);
+  z-index: 99998;
+}
+.scroll-top i { color: #fff; font-size: 24px; line-height: 0; }
