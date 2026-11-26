@@ -2281,7 +2281,7 @@ body.balsam-page { background: var(--balsam-cream); color: #383b40; }
    Delete this block to return to the previous styling.
    ===================================================================== */
 :root {
-  --vu: min(1vw, 1.7778vh); /* one design pixel at 1600x900 */
+  --vu: 1vw; /* banner scales purely with screen width, so it looks identical on every desktop */
   --ref-orange: #f45a06;
   --ref-orange-2: #fb7a14;
   --ref-ink: #17191d;
@@ -2697,4 +2697,435 @@ body.balsam-page { font-family: var(--default-font); background: #fff; }
 /* photo is pinned to the bottom so it always tucks under the wave (as in the design) on any screen ratio */
 @media (min-width: 992px) {
   .hero-visual { top: auto; bottom: calc(2.94 * var(--vu)); }
+}
+
+/* ==========================================================================
+   v1.0.6 — PHONE / TABLET banner (below 992px)
+   Same look as the design: wave at the bottom, photo tucked under it,
+   crisp chips fully visible, tighter top spacing.
+   ========================================================================== */
+@media (max-width: 991px) {
+  .executive-hero { overflow: hidden; padding-bottom: 0; }
+  .executive-hero .hero-copy { padding-top: 22px; padding-bottom: 8px; }
+  .executive-hero .min-vh-hero { min-height: 0; }
+
+  /* photo block: slightly narrower + right aligned so the left chips are never clipped */
+  .executive-hero .hero-visual { width: 94vw; max-width: 94vw; margin: 4px 0 calc(-9vw) 6vw; }
+  .executive-hero .hero-image-wrap { container-type: inline-size; overflow: visible; aspect-ratio: 766 / 709; }
+  .executive-hero .hero-image-wrap img { -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 9%); mask-image: linear-gradient(to bottom, transparent 0, #000 9%); -webkit-mask-composite: initial; mask-composite: initial; }
+
+  /* crisp chips on phone (scale with the photo) */
+  .hero-chip { position: absolute; z-index: 4; display: flex; align-items: center; gap: 3.6%; padding-left: 4.2%; border-radius: 3cqw; background: #fff; box-shadow: 0 .8cqw 2.6cqw rgba(60,35,10,.09), 0 0 0 1px rgba(236,228,222,.7); font-size: 2.35cqw; font-weight: 500; color: #23262b; white-space: nowrap; animation: none; }
+  .hero-chip svg { flex: 0 0 auto; width: 5.4cqw; height: 5.4cqw; min-width: 0; min-height: 0; }
+  .hero-chip span { line-height: 1; }
+  .chip-operations, .chip-ai { padding-left: 5.5%; }
+
+  /* wave (same shape as the design) */
+  .executive-hero::before, .executive-hero::after { position: absolute; z-index: 7; right: 0; bottom: -1px; left: 0; display: block; height: 15vw; content: ""; }
+  .executive-hero::before { background: linear-gradient(90deg, #f45a06, #fb7a14 70%, #ff8a1c);
+    clip-path: polygon(0 58%, 20% 67%, 40% 78%, 55% 82%, 70% 70%, 80% 52%, 90% 38%, 100% 30%, 100% 100%, 0 100%); }
+  .executive-hero::after { z-index: 8; background: #25282f;
+    clip-path: polygon(0 71%, 20% 78%, 40% 87%, 55% 90%, 70% 79%, 80% 67%, 90% 56%, 100% 51%, 100% 100%, 0 100%); }
+}
+@media (max-width: 575px) { .executive-hero .hero-visual { margin-bottom: calc(-8vw); } .executive-hero::before, .executive-hero::after { height: 17vw; } }
+@media (max-width: 991px) {
+  .chip-strategy   { left: 12.66%; width: 22.45%; }
+  .chip-marketing  { left: 5.35%;  width: 24.15%; }
+  .chip-operations { left: -1.57%; width: 26.24%; }
+  .chip-ai         { left: -2.35%; width: 32.51%; }
+  .chip-growth     { left: 4.18%;  width: 23.11%; }
+}
+@media (max-width: 991px) {
+  .executive-hero .hero-image-wrap img {
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 9%), linear-gradient(to right, transparent 0, rgba(0,0,0,.5) 5%, #000 16%);
+    -webkit-mask-composite: source-in;
+    mask-image: linear-gradient(to bottom, transparent 0, #000 9%), linear-gradient(to right, transparent 0, rgba(0,0,0,.5) 5%, #000 16%);
+    mask-composite: intersect;
+  }
+}
+/* ==== v1.1.0 — exact design match (1600x900 reference): photo at native size, wave, chips ==== */
+@media (min-width: 992px) {
+  .executive-hero::before {
+    z-index: 7 !important; right: 0; bottom: -1px; left: 0;
+    height: calc(8.45 * var(--vu)) !important;
+    background: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 135' preserveAspectRatio='none'><defs><linearGradient id='g' x1='0' x2='1'><stop offset='0' stop-color='%23f45a06'/><stop offset='.6' stop-color='%23fb7a14'/><stop offset='1' stop-color='%23ff8a1c'/></linearGradient></defs><path d='M0 62 C33.3 65.7 133.3 78.0 200 84 C266.7 90.0 333.3 94.3 400 98 C466.7 101.7 533.3 104.7 600 106 C666.7 107.3 750.0 108.3 800 106 C850.0 103.7 850.0 100.0 900 92 C950.0 84.0 1033.3 67.3 1100 58 C1166.7 48.7 1233.3 43.3 1300 36 C1366.7 28.7 1450.0 20.0 1500 14 C1550.0 8.0 1583.3 2.3 1600 0 L1600 50 C1583.3 50.7 1550.0 52.0 1500 54 C1450.0 56.0 1366.7 57.7 1300 62 C1233.3 66.3 1166.7 72.7 1100 80 C1033.3 87.3 950.0 99.7 900 106 C850.0 112.3 850.0 114.3 800 118 C750.0 121.7 666.7 127.0 600 128 C533.3 129.0 466.7 126.7 400 124 C333.3 121.3 266.7 117.3 200 112 C133.3 106.7 33.3 95.3 0 92 Z' fill='url(%23g)'/><path d='M0 92 C33.3 95.3 133.3 106.7 200 112 C266.7 117.3 333.3 121.3 400 124 C466.7 126.7 533.3 129.0 600 128 C666.7 127.0 750.0 121.7 800 118 C850.0 114.3 850.0 112.3 900 106 C950.0 99.7 1033.3 87.3 1100 80 C1166.7 72.7 1233.3 66.3 1300 62 C1366.7 57.7 1450.0 56.0 1500 54 C1550.0 52.0 1583.3 50.7 1600 50 L1600 135 L0 135 Z' fill='%2325282f'/></svg>") no-repeat center / 100% 100% !important;
+    clip-path: none !important;
+  }
+  .executive-hero::after { display: none !important; }
+  /* photo sits at its native 766px size, 142px from the top, flush right — as in the design */
+  .hero-visual { top: calc(1.875 * var(--vu)); right: calc(.19 * var(--vu)); width: calc(47.875 * var(--vu)); }
+  .hero-image-wrap::after { content: "" !important; display: block !important; position: absolute; z-index: 3; left: 0; bottom: 0; width: 34%; height: 14%; pointer-events: none; background: linear-gradient(to bottom, rgba(255,255,255,0), #fff); -webkit-mask-image: linear-gradient(to right, #000 55%, transparent); mask-image: linear-gradient(to right, #000 55%, transparent); }
+  .hero-image-wrap img {
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 9%), linear-gradient(to bottom, transparent 0, #000 3%, #000 100%);
+            mask-image: linear-gradient(to right, transparent 0, #000 9%), linear-gradient(to bottom, transparent 0, #000 3%, #000 100%);
+  }
+}
+
+@media (min-width: 992px) {
+  .executive-hero { min-height: calc(56.25 * var(--vu)) !important; padding-bottom: 0 !important; overflow: hidden; }
+  .executive-hero .min-vh-hero { min-height: calc(56.25 * var(--vu) - var(--ref-hdr)) !important; }
+}
+/* the round "scroll" button covered the chart bars; show it only after the visitor leaves the hero */
+body:not(.scrolled) .scroll-top { opacity: 0 !important; visibility: hidden !important; pointer-events: none; }
+
+/* ==========================================================================
+   CARD STYLES — every section now has its own card language
+   ========================================================================== */
+
+/* 1) What We Help You Improve — soft peach panels with a solid icon badge */
+.improvement-grid article { position: relative; overflow: hidden; min-height: 262px; padding: 30px 26px; border: 0; border-radius: 22px; background: linear-gradient(160deg, #ffffff 0%, #fff1e6 100%); box-shadow: 0 16px 36px rgba(233,78,36,.09); transition: transform .25s ease, box-shadow .25s ease; }
+.improvement-grid article::after { position: absolute; right: -38px; bottom: -38px; width: 130px; height: 130px; border-radius: 50%; background: rgba(233,78,36,.08); content: ""; }
+.improvement-grid article:hover { transform: translateY(-6px); box-shadow: 0 22px 44px rgba(233,78,36,.16); }
+.improvement-grid i { display: grid; place-items: center; width: 54px; height: 54px; margin-bottom: 26px; border-radius: 17px; background: linear-gradient(135deg, #f45a06, #ff8a1c); color: #fff; font-size: 23px; box-shadow: 0 10px 22px rgba(244,90,6,.32); }
+
+/* 2) Programmes — three identical cards in the design's style: white, rounded, orange top edge, peach tags, pill enquiry button */
+.programme-card { position: relative; overflow: hidden; border: 1px solid #ece7e3; border-radius: 26px; background: #fff; box-shadow: 0 18px 44px rgba(23,25,29,.07); transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
+.programme-card::before { position: absolute; top: 0; right: 0; left: 0; height: 6px; background: linear-gradient(90deg, #f45a06, #ff8a1c); content: ""; }
+.programme-card:hover { transform: translateY(-6px); border-color: rgba(244,90,6,.45); box-shadow: 0 26px 54px rgba(233,78,36,.14); }
+.programme-card .programme-number { display: inline-block; align-self: flex-start; padding: 6px 14px; border-radius: 999px; background: #fdeee1; color: #f45a06; }
+.programme-card h3 { color: #17191d; }
+.programme-card .programme-intro { color: #f45a06; font-weight: 500; }
+.programme-card .ideal-for { border: 0; border-radius: 14px; background: #fff6ee; }
+.programme-card a { justify-content: center; gap: 10px; margin-top: 0; padding: 14px 20px; border: 0; border-radius: 999px; background: linear-gradient(90deg, #f45a06, #fb7210); color: #fff; box-shadow: 0 10px 24px rgba(244,90,6,.24); }
+.programme-card a i { color: #fff; }
+.programme-card a:hover { background: linear-gradient(90deg, #e04f02, #ee640a); }
+/* section heading: orange label pill + two-tone title, like the other sections */
+.programmes-section .section-label { display: inline-flex; margin-bottom: 14px; padding: 8px 20px; border-radius: 999px; background: #fdeee1; color: #f45a06; font-weight: 700; letter-spacing: .24em; }
+
+/* 3) Who Can Benefit — outlined tiles with a large ghost numeral */
+.who-grid article { position: relative; overflow: hidden; min-height: 214px; padding: 30px 28px 28px 32px; border: 1px solid #e6d8cc; border-top: 1px solid #e6d8cc; border-radius: 16px; background: transparent; box-shadow: none; }
+.who-grid article::before { position: absolute; top: 30px; bottom: 30px; left: 0; width: 4px; border-radius: 0 4px 4px 0; background: linear-gradient(180deg, #f45a06, #ff8a1c); content: ""; }
+.who-grid article:hover { transform: none; border-color: #f45a06; background: #fff8f3; box-shadow: 0 14px 30px rgba(233,78,36,.1); }
+.who-grid b { position: absolute; top: 4px; right: 20px; display: block; width: auto; height: auto; border-radius: 0; background: none; color: rgba(244,90,6,.16); font: 700 68px/1 var(--heading-font); letter-spacing: -.04em; }
+.who-grid h3 { margin: 58px 0 10px; }
+
+/* 4) Why Choose Balsam — glass cards on the dark section */
+.why-grid article { border: 1px solid rgba(255,255,255,.12); border-top: 1px solid rgba(255,255,255,.12); border-radius: 18px; background: rgba(255,255,255,.05); box-shadow: none; }
+.why-grid article:hover { transform: translateY(-5px); border-color: rgba(255,138,28,.75); background: rgba(244,90,6,.12); box-shadow: 0 18px 38px rgba(0,0,0,.28); }
+.why-grid i { display: grid; place-items: center; width: 48px; height: 48px; margin-bottom: 24px; border: 1.5px solid rgba(255,138,28,.7); border-radius: 50%; color: #ff9a45; font-size: 20px; }
+.why-grid h3 { color: #fff; }
+.why-grid p { color: #b9bcc0; }
+
+/* "Start your next chapter" label: was dark on a dark photo — now a design-orange pill */
+.final-cta .section-label { display: inline-flex; align-items: center; gap: 10px; padding: 9px 22px; border: 1px solid rgba(255,138,28,.55); border-radius: 999px; background: rgba(244,90,6,.14); color: #ff9a45; font-weight: 700; letter-spacing: .26em; }
+.final-cta .section-label::before { width: 7px; height: 7px; border-radius: 50%; background: #ff8a1c; content: ""; }
+
+
+/* ---- Programmes: two-tone heading + three distinct package styles (v1.1.1) ---- */
+.programmes-section .section-heading .section-label { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 16px; padding: 8px 18px; border-radius: 999px; background: #fdeee1; color: var(--balsam-orange); font-weight: 700; letter-spacing: .2em; }
+.programmes-section .section-heading .section-label::before { width: 7px; height: 7px; border-radius: 50%; background: var(--balsam-orange); content: ""; }
+.programmes-section .section-heading h2 em { color: var(--balsam-orange); font-style: normal; }
+
+
+
+/* logo nudged slightly to the right (desktop) */
+@media (min-width: 992px) { .header .brand { margin-left: calc(3.4 * var(--vu)); } }
+
+/* logo size: scaled down ~12% (still scales with the screen) */
+@media (min-width: 992px) { .header .brand img { width: max(130px, calc(13.5 * var(--vu))); height: auto; } }
+
+
+/* ==========================================================================
+   RESPONSIVE BANNER (tablet + mobile) — same look as desktop:
+   text first, then the full photo (all 5 chart steps), same wave, same chips.
+   Everything below is sized from the photo width so proportions never change.
+   ========================================================================== */
+@media (max-width: 991px) {
+  .executive-hero { min-height: 0 !important; padding-bottom: 0 !important; overflow: hidden; }
+  .executive-hero::before { display: block !important; content: ""; position: absolute; z-index: 7 !important; right: 0; bottom: -1px; left: 0;
+    height: 16.2vw !important; background: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 135' preserveAspectRatio='none'><defs><linearGradient id='g' x1='0' x2='1'><stop offset='0' stop-color='%23f45a06'/><stop offset='.6' stop-color='%23fb7a14'/><stop offset='1' stop-color='%23ff8a1c'/></linearGradient></defs><path d='M0 62 C33.3 65.7 133.3 78.0 200 84 C266.7 90.0 333.3 94.3 400 98 C466.7 101.7 533.3 104.7 600 106 C666.7 107.3 750.0 108.3 800 106 C850.0 103.7 850.0 100.0 900 92 C950.0 84.0 1033.3 67.3 1100 58 C1166.7 48.7 1233.3 43.3 1300 36 C1366.7 28.7 1450.0 20.0 1500 14 C1550.0 8.0 1583.3 2.3 1600 0 L1600 50 C1583.3 50.7 1550.0 52.0 1500 54 C1450.0 56.0 1366.7 57.7 1300 62 C1233.3 66.3 1166.7 72.7 1100 80 C1033.3 87.3 950.0 99.7 900 106 C850.0 112.3 850.0 114.3 800 118 C750.0 121.7 666.7 127.0 600 128 C533.3 129.0 466.7 126.7 400 124 C333.3 121.3 266.7 117.3 200 112 C133.3 106.7 33.3 95.3 0 92 Z' fill='url(%23g)'/><path d='M0 92 C33.3 95.3 133.3 106.7 200 112 C266.7 117.3 333.3 121.3 400 124 C466.7 126.7 533.3 129.0 600 128 C666.7 127.0 750.0 121.7 800 118 C850.0 114.3 850.0 112.3 900 106 C950.0 99.7 1033.3 87.3 1100 80 C1166.7 72.7 1233.3 66.3 1300 62 C1366.7 57.7 1450.0 56.0 1500 54 C1550.0 52.0 1583.3 50.7 1600 50 L1600 135 L0 135 Z' fill='%2325282f'/></svg>") no-repeat center / 100% 100% !important; clip-path: none !important; }
+  .executive-hero::after { display: none !important; }
+  .executive-hero .hero-visual { position: relative !important; top: auto !important; right: auto !important; left: auto !important;
+    width: 100vw !important; max-width: 100vw !important; min-height: 0 !important; margin: 14px 0 0 calc(50% - 50vw) !important; padding: 0 0 2.4vw !important; }
+  .executive-hero .hero-image-wrap { position: relative; width: 92% !important; margin-left: auto; height: auto !important; aspect-ratio: 766 / 709; overflow: visible !important; }
+  .executive-hero .hero-image-wrap img { width: 100%; height: 100%; object-fit: contain !important; object-position: center; transform: none;
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 7%), linear-gradient(to bottom, transparent 0, #000 4%, #000 95%, transparent 100%);
+            mask-image: linear-gradient(to right, transparent 0, #000 7%), linear-gradient(to bottom, transparent 0, #000 4%, #000 95%, transparent 100%);
+    -webkit-mask-composite: source-in; mask-composite: intersect; }
+  .executive-hero .hero-image-wrap::after { content: "" !important; display: block !important; position: absolute; z-index: 3; left: 0; bottom: 0; width: 34%; height: 14%; pointer-events: none; background: linear-gradient(to bottom, rgba(255,255,255,0), #fff); -webkit-mask-image: linear-gradient(to right, #000 55%, transparent); mask-image: linear-gradient(to right, #000 55%, transparent); }
+  .executive-hero .hero-chip { display: flex !important; font-size: clamp(9px, 2.55vw, 17px) !important; border-radius: 2.2vw !important; }
+  .executive-hero .hero-chip svg { width: 3.6vw !important; height: 3.6vw !important; min-width: 14px !important; min-height: 14px !important; }
+}
+
+/* navigation: items sit closer together and closer to the logo (desktop) */
+@media (min-width: 992px) {
+  .header > .container-xl { justify-content: flex-start; }
+  .header .navmenu { justify-content: flex-start; margin-left: calc(3 * var(--vu)); }
+  .header .navmenu ul { gap: clamp(16px, calc(1.9 * var(--vu)), 30px); }
+  .header-cta { margin-left: auto; }
+}
+
+/* header (desktop): logo lines up with the hero text, menu links sit closer together */
+@media (min-width: 992px) {
+  .header > .container-xl { padding-left: 5.1%; }
+  .header .brand { margin-left: calc(-0.6 * var(--vu)); }
+  .header .navmenu ul { gap: clamp(12px, calc(1.5 * var(--vu)), 24px); }
+}
+@media (min-width: 1200px) { .header .navmenu { flex: 1 1 auto; display: flex; justify-content: flex-end; margin-right: calc(.3 * var(--vu)); } }
+
+/* ==========================================================================
+   v1.2.0 — SIZE CORRECTIONS (banner text smaller, challenge cards larger)
+   Paste at the very end of main.css
+   ========================================================================== */
+
+/* ---------- DESKTOP BANNER: reduce text to design proportions ---------- */
+@media (min-width: 992px) {
+  .executive-hero .eyebrow { font-size: max(10.5px, calc(.98 * var(--vu))); letter-spacing: .18em; margin-bottom: calc(1.3 * var(--vu)); }
+
+  .hero-copy h1 {
+    font-size: max(30px, calc(3.9 * var(--vu)));
+    line-height: 1.06;
+    letter-spacing: -.03em;
+    margin-bottom: calc(1.2 * var(--vu));
+  }
+
+  .hero-copy > p.hero-description {
+    font-size: max(12px, calc(1.1 * var(--vu)));
+    line-height: 1.5;
+  }
+
+  .hero-actions { margin-top: calc(2 * var(--vu)); }
+  .btn-primary-orange {
+    width: calc(23 * var(--vu));
+    min-height: max(40px, calc(3.4 * var(--vu)));
+    font-size: max(12px, calc(1.1 * var(--vu)));
+    padding: 0 calc(1.6 * var(--vu));
+  }
+  .overview-play { width: max(28px, calc(2.4 * var(--vu))); height: max(28px, calc(2.4 * var(--vu))); font-size: max(13px, calc(1.2 * var(--vu))); }
+  .hero-overview b { font-size: max(11px, calc(.98 * var(--vu))); }
+  .hero-overview small { font-size: max(10px, calc(.88 * var(--vu))); }
+
+  .hero-proof { margin-top: calc(2.6 * var(--vu)); }
+  .hero-proof span { font-size: max(10.5px, calc(.95 * var(--vu))); min-height: calc(3.2 * var(--vu)); }
+  .hero-proof .proof-ico { width: max(26px, calc(2.7 * var(--vu))); height: max(26px, calc(2.7 * var(--vu))); }
+
+  .header .navmenu a { font-size: max(12px, calc(1.02 * var(--vu))); }
+  .header-cta { font-size: max(12px, calc(.98 * var(--vu))); }
+}
+@media (min-width: 992px) and (max-width: 1200px) {
+  .hero-copy h1 { font-size: max(30px, calc(3.9 * var(--vu))); }
+}
+
+/* ---------- BUSINESS CHALLENGES: increase card text to design size ---------- */
+.challenge-grid h3 {
+  font-size: clamp(15px, 1.2vw, 23px);
+  font-weight: 600;
+  line-height: 1.22;
+  letter-spacing: -.01em;
+}
+.challenge-grid p {
+  font-size: clamp(13px, .98vw, 18px);
+  line-height: 1.35;
+  margin-top: .5em;
+  max-width: none;
+}
+.challenge-note { font-size: clamp(13px, 1.05vw, 17px); }
+.challenge-note strong { font-size: clamp(14px, 1.2vw, 19px); }
+
+@media (min-width: 1200px) {
+  .challenge-grid h3 { white-space: nowrap; font-size: clamp(15px, 1.2vw, 23px); }
+  .challenge-grid p { max-width: 15em; font-size: clamp(13px, .98vw, 18px); }
+}
+@media (max-width: 1100px) {
+  .challenge-grid h3 { font-size: 16px; }
+  .challenge-grid p  { font-size: 13.5px; }
+}
+@media (max-width: 767px) {
+  .challenge-grid h3 { font-size: 16px; }
+  .challenge-grid p  { font-size: 13.5px; }
+  .challenge-grid article { gap: 14px; }
+}
+
+/* ---------- MOBILE / TABLET BANNER: same look as desktop, scales with width ---------- */
+@media (max-width: 991px) {
+  .executive-hero .eyebrow { font-size: clamp(10px, 2.3vw, 15px); letter-spacing: .16em; margin-bottom: 14px; }
+  .executive-hero .hero-copy h1 {
+    font-size: clamp(30px, 8.4vw, 58px);
+    line-height: 1.06;
+    letter-spacing: -.03em;
+    font-weight: 700;
+    margin-bottom: 14px;
+  }
+  .executive-hero .hero-copy > p.hero-description {
+    font-size: clamp(13.5px, 3.3vw, 20px);
+    line-height: 1.5;
+    max-width: none;
+  }
+  .executive-hero .btn-primary-orange {
+    width: 100%; max-width: 440px; min-height: 52px;
+    font-size: clamp(14px, 3.6vw, 18px); justify-content: flex-start; padding: 0 20px;
+  }
+  .executive-hero .btn-primary-orange .bi-chevron-right { margin-left: auto; }
+  .executive-hero .hero-proof { gap: 12px 18px; margin-top: 22px; }
+  .executive-hero .hero-proof span { font-size: clamp(12px, 3vw, 16px); }
+  .executive-hero .hero-proof .proof-ico { width: clamp(28px, 7vw, 40px); height: clamp(28px, 7vw, 40px); }
+}
+@media (max-width: 575px) {
+  .executive-hero .hero-copy > p.hero-description br { display: none; }
+  .executive-hero .hero-proof { display: grid; grid-template-columns: repeat(3, auto); justify-content: space-between; gap: 8px; }
+  .executive-hero .hero-proof span { flex-direction: column; align-items: flex-start; gap: 6px; font-size: clamp(11px, 3vw, 13px); }
+}
+/* ==========================================================================
+   v1.3.0 — "How We Help Transform Your Business" (method-board) : LARGER TEXT
+   Paste at the very end of main.css
+   ========================================================================== */
+
+/* ---------- Heading + sub-heading ---------- */
+.process-section:not(#method) .section-heading h2 {
+  font-size: clamp(30px, 3.4vw, 35px);
+  font-weight: 200;
+  line-height: 1.12;
+  letter-spacing: -.02em;
+}
+.process-section:not(#method) .process-intro {
+  font-size: clamp(15px, 1.35vw, 20px);
+  font-weight: 200;
+  margin-top: 14px;
+}
+
+/* ---------- Wider container on desktop so bigger text has room ---------- */
+@media (min-width: 1200px) {
+  .process-section:not(#method) .container { max-width: 1450px; padding-left: 28px; padding-right: 28px; }
+}
+
+/* ---------- Step cards ---------- */
+.method-board article {
+  min-height: clamp(330px, 26vw, 420px);
+  padding: clamp(22px, 1.9vw, 32px) clamp(18px, 1.6vw, 28px);
+}
+.method-board b {
+  font-size: clamp(13px, 1vw, 16px);
+  letter-spacing: .06em;
+}
+.method-board i {
+  margin: clamp(40px, 4.2vw, 70px) 0 clamp(16px, 1.5vw, 24px);
+  font-size: clamp(28px, 2.4vw, 40px);
+}
+.method-board h3 {
+  font-size: clamp(16px, 1.35vw, 22px);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -.01em;
+  margin: 0;
+}
+.method-board p {
+  margin: clamp(10px, .9vw, 16px) 0 0;
+  font-size: clamp(13px, 1vw, 16px);
+  line-height: 1.6;
+  color: #c3c6ca;
+}
+
+/* ---------- Tablet: 3 columns ---------- */
+@media (max-width: 1200px) {
+  .method-board article { min-height: 300px; }
+  .method-board h3 { font-size: 18px; }
+  .method-board p  { font-size: 14.5px; }
+  .method-board b  { font-size: 13.5px; }
+  .method-board i  { font-size: 32px; margin-top: 44px; }
+}
+
+/* ---------- Mobile: 2 columns ---------- */
+@media (max-width: 767px) {
+  .process-section:not(#method) .section-heading h2 { font-size: clamp(28px, 7.4vw, 36px); }
+  .process-section:not(#method) .process-intro { font-size: 15px; }
+  .method-board article { min-height: 0; padding: 22px 18px; }
+  .method-board h3 { font-size: 16.5px; }
+  .method-board p  { font-size: 13.5px; }
+  .method-board i  { margin: 30px 0 14px; font-size: 30px; }
+}
+
+/* ---------- Small phones: 1 column so the larger text stays readable ---------- */
+@media (max-width: 575px) {
+  .method-board { grid-template-columns: 1fr; }
+  .method-board article,
+  .method-board article:nth-child(n) { border-right: 0; border-bottom: 1px solid #3a3d42; }
+  .method-board article:last-child { border-bottom: 0; }
+  .method-board article:hover { transform: none; }
+  .method-board h3 { font-size: 18px; }
+  .method-board p  { font-size: 14.5px; }
+  .method-board i  { margin: 22px 0 12px; }
+}
+
+/* ==========================================================================
+   v1.4.0 — REMOVE UNWANTED GAPS (banner rules are NOT touched)
+   Paste at the very end of main.css
+   ========================================================================== */
+
+/* ---------- Safety: no sideways scroll / blank strip on mobile ---------- */
+html, body { max-width: 100%; }
+body.balsam-page { overflow-x: clip; }
+
+/* ---------- Section spacing: was 110px (72px mobile), now scales ---------- */
+.section { padding: clamp(44px, 4.6vw, 72px) 0; }
+.challenge-section { padding: clamp(36px, 2.6vw, 44px) 0 clamp(40px, 3.4vw, 56px); } /* keeps its own tight spacing */
+.final-cta { padding: clamp(56px, 6vw, 84px) 0; }
+
+/* ---------- Section headings ---------- */
+.section-heading { margin-bottom: clamp(22px, 2.4vw, 38px); }
+.section-heading h2, .why-section h2, .about-copy h2 { margin-top: 10px; }
+.improvement-intro { margin: 0 0 clamp(22px, 2.2vw, 32px); }
+.programmes-section .section-heading .section-label { margin-bottom: 10px; }
+
+/* ---------- How We Help Transform (step cards) ---------- */
+.method-board article { min-height: clamp(260px, 20vw, 330px); }
+.method-board i { margin: clamp(24px, 2.6vw, 44px) 0 clamp(12px, 1.2vw, 18px); }
+
+/* ---------- What We Help You Improve ---------- */
+.improvement-grid article { min-height: 0; padding: 26px 24px; }
+.improvement-grid i { margin-bottom: 18px; }
+
+/* ---------- Programmes (empty space inside cards) ---------- */
+.programme-card { min-height: 0; padding: 30px 28px; }
+.programme-card h3 { margin: 18px 0 10px; }
+.programme-intro { min-height: 0; margin-bottom: 10px; }
+.programme-detail { min-height: 0; padding-bottom: 14px; margin-bottom: 0; }
+.programme-card ul { margin: 6px 0 20px; }
+.ideal-for { margin: auto 0 16px; }
+.programme-note { margin-top: 26px; }
+
+/* ---------- Who Can Benefit ---------- */
+.who-grid article { min-height: 0; padding: 26px 26px 24px 30px; }
+.who-grid h3 { margin: 46px 0 8px; }
+
+/* ---------- How Our Mentorship Works ---------- */
+.process-grid article { min-height: 0; padding: 24px; }
+.process-grid i { margin-top: 22px; }
+
+/* ---------- Why Choose Balsam ---------- */
+.why-grid { grid-auto-rows: auto; }
+.why-grid article { min-height: 0; padding: 24px; }
+.why-grid i { margin-bottom: 18px; }
+.why-lead { margin: 16px 0 20px; }
+
+/* ---------- About ---------- */
+.about-panel { padding: clamp(28px, 4vw, 52px) clamp(22px, 5vw, 66px); }
+.about-copy p.about-lead { margin-top: 14px; }
+.philosophy { margin-top: 10px; padding-top: 20px; }
+
+/* ---------- Final CTA + footer ---------- */
+.final-cta h2 { margin: 14px 0 10px; }
+.final-cta p:last-of-type { margin-bottom: 20px; }
+.footer { padding: 34px 0 14px; }
+.footer-main { padding-bottom: 20px; gap: 28px; }
+
+/* ---------- Tablet / mobile ---------- */
+@media (max-width: 991px) {
+  .why-section .row > div:first-child { margin-bottom: 26px; }
+  .method-board article { min-height: 0; }
+}
+@media (max-width: 767px) {
+  .section { padding: 44px 0; }
+  .challenge-section { padding: 36px 0 40px; }
+  .final-cta { padding: 56px 0; }
+  .section-heading .col-lg-4, .section-heading .col-lg-5 { margin-top: 10px; }
+  .method-board article { padding: 20px 16px; }
+  .method-board i { margin: 18px 0 10px; }
+  .programme-card { padding: 24px 20px; }
+  .who-grid article { padding: 22px 22px 20px 26px; }
+  .why-grid article { padding: 20px; }
+  .why-grid i { margin-bottom: 14px; }
+  .footer-main { gap: 22px; }
+}
+@media (max-width: 575px) {
+  .method-board i { margin: 14px 0 8px; }
 }
