@@ -13,7 +13,7 @@
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
   <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="assets/css/main.css?v=161" rel="stylesheet">
+  <link href="assets/css/main.css?v=160" rel="stylesheet">
 </head>
 <body class="balsam-page">
   <header id="header" class="header fixed-top">
@@ -338,36 +338,73 @@
     </div>
   </dialog>
   <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/js/main.js"></script>
-<script>
-(function () {
-  var old = document.getElementById('scroll-top');
-  if (!old) return;
-  var btn = old.cloneNode(true);            // removes the old click behaviour
-  old.parentNode.replaceChild(btn, old);
-  var icon = btn.querySelector('i');
+    <script src="assets/js/main.js"></script>
 
-  function atTop() { return window.scrollY < window.innerHeight * 0.4; }
+<script>
+/* ===== 1) MOBILE MENU ===== */
+(function () {
+  var old = document.querySelector('.mobile-nav-toggle');
+  if (!old) return;
+  var btn = old.cloneNode(true);
+  old.parentNode.replaceChild(btn, old);
+  var nav = document.getElementById('navmenu');
+
+  function setOpen(open) {
+    document.body.classList.toggle('mobile-nav-active', open);
+    btn.classList.toggle('bi-list', !open);
+    btn.classList.toggle('bi-x', open);
+  }
+  btn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    setOpen(!document.body.classList.contains('mobile-nav-active'));
+  });
+  nav.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', function () { setOpen(false); });
+  });
+  nav.addEventListener('click', function (e) { if (e.target === nav) setOpen(false); });
+})();
+
+/* ===== 2) ONE AUTO ARROW (down in first half, up in second half) ===== */
+(function () {
+  document.querySelectorAll('.sa-btn, .sa-one').forEach(function (e) { e.remove(); });
+  var old = document.getElementById('scroll-top');
+  if (old) old.remove();
+
+  var st = document.createElement('style');
+  st.textContent =
+    '.sa-one{position:fixed;right:27px;bottom:88px;width:44px;height:44px;border-radius:50%;' +
+    'background:#17191d;color:#fff;display:flex;align-items:center;justify-content:center;' +
+    'font-size:26px;line-height:0;z-index:99998;cursor:pointer;border:0;padding:0;' +
+    'box-shadow:0 6px 18px rgba(0,0,0,.25);-webkit-tap-highlight-color:transparent}' +
+    '.sa-one i{line-height:0}';
+  document.head.appendChild(st);
+
+  var btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'sa-one';
+  btn.innerHTML = '<i class="bi bi-arrow-down-short"></i>';
+  document.body.appendChild(btn);
+  var icon = btn.firstChild;
+
+  function pos() { return window.pageYOffset || document.documentElement.scrollTop || 0; }
+  function maxScroll() {
+    return Math.max(document.documentElement.scrollHeight, document.body.scrollHeight) - window.innerHeight;
+  }
+  function goDown() { return pos() < maxScroll() / 2; }
 
   function update() {
-    var top = atTop();
-    icon.className = 'bi ' + (top ? 'bi-arrow-down-short' : 'bi-arrow-up-short');
-    btn.setAttribute('aria-label', top ? 'Scroll down to the next section' : 'Back to top');
-    btn.setAttribute('href', top ? '#challenges' : '#top');
+    var d = goDown();
+    icon.className = 'bi ' + (d ? 'bi-arrow-down-short' : 'bi-arrow-up-short');
+    btn.setAttribute('aria-label', d ? 'Go to last page' : 'Go to first page');
   }
 
-  btn.addEventListener('click', function (e) {
-    e.preventDefault();
-    if (atTop()) {
-      var next = document.getElementById('challenges');
-      if (next) next.scrollIntoView({ behavior: 'smooth' });
-    } else {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+  btn.addEventListener('click', function () {
+    window.scrollTo({ top: goDown() ? maxScroll() : 0, behavior: 'smooth' });
   });
 
   window.addEventListener('scroll', update, { passive: true });
   window.addEventListener('resize', update);
+  window.addEventListener('load', update);
   update();
 })();
 </script>
