@@ -3208,3 +3208,29 @@ body.balsam-page { overflow-x: clip; }
   .navmenu ul { top: calc(var(--ref-hdr) + 8px); }
   .mobile-nav-active .mobile-nav-toggle { top: calc((var(--ref-hdr) - 44px) / 2); }
 }
+/* ==========================================================================
+   v1.5.2 — "You don't have to figure everything out alone." (mobile fix)
+   Banner rules are NOT touched
+   ========================================================================== */
+@media (max-width: 767px) {
+  .challenge-section .challenge-note {
+    display: block;                 /* stop the column/flex layout */
+    margin: 22px 0 0 0;
+    padding: 2px 0 2px 14px;
+    border-left: 4px solid var(--ref-orange);   /* orange bar, like the design */
+    text-align: left;
+    font-size: 13.5px;
+    line-height: 1.55;
+  }
+  .challenge-section .challenge-note::before { display: none; }  /* removes the stray dot */
+  .challenge-section .challenge-note strong {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 15px;
+    text-align: left;
+  }
+
+  /* keep the orange corner wave below the text instead of over it */
+  .challenge-section { padding-bottom: 84px; }
+  .challenge-section::after { width: 200px; height: 62px; }
+}
