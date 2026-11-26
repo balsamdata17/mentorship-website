@@ -3290,3 +3290,10 @@ body.balsam-page { overflow-x: clip; }
   .navmenu ul { top: calc(var(--ref-hdr) + 8px); }
   .mobile-nav-active .mobile-nav-toggle { top: calc((var(--ref-hdr) - 44px) / 2); }
 }
+/* v1.8.0 — all 6 challenge cards slide in together */
+.challenge-cards-enter .challenge-grid article,
+.challenge-cards-enter .challenge-grid article:nth-child(n) {
+  animation: none !important;
+  animation-delay: 0s !important;
+}
+.challenge-grid article { transition-delay: 0s !important; }
